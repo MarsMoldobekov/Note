@@ -32,7 +32,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.getNoteTitle().setText(notes.get(position).getTitle());
-        holder.getNoteDescription().setText(notes.get(position).getDescription());
         holder.getNoteDate().setText(notes.get(position).getDate());
     }
 
@@ -43,22 +42,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView noteTitle;
-        private final TextView noteDescription;
         private final TextView noteDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             noteTitle = itemView.findViewById(R.id.note_title);
-            noteDescription = itemView.findViewById(R.id.note_description);
             noteDate = itemView.findViewById(R.id.note_date);
         }
 
         public TextView getNoteTitle() {
             return noteTitle;
-        }
-
-        public TextView getNoteDescription() {
-            return noteDescription;
         }
 
         public TextView getNoteDate() {
