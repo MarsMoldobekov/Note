@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.note.R;
-import com.example.note.domain.data.Note;
+import com.example.note.domain.Note;
 
 public class DetailsFragment extends Fragment {
     private final static String ARG_NOTE = "ARG_NOTE";

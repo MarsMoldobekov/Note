@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.note.domain.data.Note;
+import com.example.note.domain.Note;
 import com.example.note.presenter.Presenter;
 import com.example.note.ui.fragments.DetailsFragment;
 import com.example.note.ui.fragments.ListFragment;

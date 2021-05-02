@@ -1,4 +1,4 @@
-package com.example.note.domain.data;
+package com.example.note.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -3,9 +3,6 @@ package com.example.note.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.note.domain.data.Note;
-import com.example.note.domain.data.NotesRepository;
-
 import java.util.List;
 
 public class MainDomain implements Parcelable {
@@ -32,6 +29,10 @@ public class MainDomain implements Parcelable {
 
     public List<Note> getNotes() {
         return repository.getNotes();
+    }
+
+    public Note getNoteByPosition(int position) {
+        return repository.getNotes().get(position);
     }
 
     @Override

@@ -1,10 +1,10 @@
-package com.example.note.domain.data;
+package com.example.note.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NotesRepository {
+class NotesRepository {
     public List<Note> getNotes() {
         List<Note> notes = new ArrayList<>();
 

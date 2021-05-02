@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.note.R;
-import com.example.note.domain.data.Note;
+import com.example.note.domain.Note;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.note.domain.MainDomain;
-import com.example.note.domain.data.Note;
+import com.example.note.domain.Note;
 import com.example.note.ui.Context;
 
 import java.util.List;
@@ -53,6 +53,6 @@ public class Presenter implements Parcelable {
     }
 
     public Note onNotePressed(int position) {
-        return domain.getNotes().get(position);
+        return domain.getNoteByPosition(position);
     }
 }
