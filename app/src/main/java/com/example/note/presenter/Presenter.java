@@ -52,7 +52,7 @@ public class Presenter implements Parcelable {
         dest.writeParcelable(domain, flags);
     }
 
-    public void onNotePressed(int position) {
-
+    public Note onNotePressed(int position) {
+        return domain.getNotes().get(position);
     }
 }

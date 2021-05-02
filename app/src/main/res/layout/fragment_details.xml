@@ -6,6 +6,7 @@
 
     <TextView
         android:id="@+id/description"
+        android:textSize="@dimen/text_size"
         android:layout_width="@dimen/fill_constraint"
         android:layout_height="@dimen/fill_constraint"
         android:layout_margin="@dimen/layout_margin"

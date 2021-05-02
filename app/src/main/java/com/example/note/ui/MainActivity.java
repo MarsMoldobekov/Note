@@ -8,13 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.note.domain.data.Note;
 import com.example.note.presenter.Presenter;
+import com.example.note.ui.fragments.DetailsFragment;
 import com.example.note.ui.fragments.ListFragment;
 import com.example.note.R;
 
 public class MainActivity extends AppCompatActivity implements Context {
     private final static String PRESENTER_KEY = "PRESENTER_KEY";
     private Presenter presenter;
+    private boolean isLandscape;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Context {
             presenter.setContext(this);
         }
 
-        boolean isLandscape = getResources().getBoolean(R.bool.isLandscape);
+        isLandscape = getResources().getBoolean(R.bool.isLandscape);
         int id = (isLandscape) ? R.id.fragment_container_land : R.id.fragment_container;
 
         FragmentManager manager = getSupportFragmentManager();
@@ -53,6 +56,18 @@ public class MainActivity extends AppCompatActivity implements Context {
 
     @Override
     public void onNotePressed(int position) {
-        presenter.onNotePressed(position);
+        Note note = presenter.onNotePressed(position);
+        FragmentManager manager = getSupportFragmentManager();
+
+        if (isLandscape) {
+            manager.beginTransaction()
+                    .replace(R.id.fragment_detail, DetailsFragment.newInstance(note))
+                    .commit();
+        } else {
+            manager.beginTransaction()
+                    .replace(R.id.fragment_container, DetailsFragment.newInstance(note))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }
