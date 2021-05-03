@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements Context {
 
         if (fragment == null) {
             manager.beginTransaction()
+                    .setReorderingAllowed(true)
                     .replace(id, new ListFragment())
                     .commit();
         }
@@ -58,14 +59,17 @@ public class MainActivity extends AppCompatActivity implements Context {
     public void onNotePressed(int position) {
         Note note = presenter.onNotePressed(position);
         FragmentManager manager = getSupportFragmentManager();
+        DetailsFragment fragment = DetailsFragment.newInstance(note);
 
         if (isLandscape) {
             manager.beginTransaction()
-                    .replace(R.id.fragment_detail, DetailsFragment.newInstance(note))
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_detail, fragment)
                     .commit();
         } else {
             manager.beginTransaction()
-                    .replace(R.id.fragment_container, DetailsFragment.newInstance(note))
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit();
         }
