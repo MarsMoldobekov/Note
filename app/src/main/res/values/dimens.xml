@@ -5,4 +5,6 @@
     <dimen name="card_view_layout_margin">8dp</dimen>
     <dimen name="text_size">20sp</dimen>
     <dimen name="fill_constraint">0dp</dimen>
+    <dimen name="navigation_header_height">200dp</dimen>
+    <dimen name="navigation_header_dimen">42sp</dimen>
 </resources>
