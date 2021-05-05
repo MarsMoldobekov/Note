@@ -11,13 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.note.R;
 import com.example.note.domain.Note;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
     private final List<Note> notes;
 
-    public MyAdapter(List<Note> notes) {
-        this.notes = notes;
+    public NotesAdapter() {
+        notes = new ArrayList<>();
+    }
+
+    public void addNotes(List<Note> notes) {
+        this.notes.clear();
+        this.notes.addAll(notes);
     }
 
     @NonNull

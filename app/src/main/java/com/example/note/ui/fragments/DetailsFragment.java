@@ -9,23 +9,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.R;
-import com.example.note.domain.Note;
+import com.example.note.viewmodel.NotesListViewModel;
 
 public class DetailsFragment extends Fragment {
-    private final static String ARG_NOTE = "ARG_NOTE";
-
-    @NonNull
-    public static DetailsFragment newInstance(Note note) {
-        DetailsFragment fragment = new DetailsFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_NOTE, note);
-
-        fragment.setArguments(bundle);
-        return fragment;
-    }
 
     @Nullable
     @Override
@@ -39,11 +28,11 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        TextView textView = view.findViewById(R.id.description);
-        if (getArguments() != null) {
-            Note note = getArguments().getParcelable(ARG_NOTE);
-            textView.setText(note.getDescription());
-        }
+        NotesListViewModel viewModel = new ViewModelProvider(requireActivity())
+                .get(NotesListViewModel.class);
+        viewModel.getSelectedNote().observe(getViewLifecycleOwner(), note -> {
+            TextView textView = view.findViewById(R.id.description);
+            textView.setText((note == null) ? "" : note.getDescription());
+        });
     }
 }
