@@ -8,30 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.note.R;
-import com.example.note.ui.Context;
-import com.example.note.ui.adapters.MyAdapter;
+import com.example.note.ui.adapters.NotesAdapter;
 import com.example.note.ui.listeners.RecyclerItemClickListener;
+import com.example.note.viewmodel.NotesListViewModel;
 
 public class ListFragment extends Fragment {
-    private Context context;
-
-    @Override
-    public void onAttach(@NonNull android.content.Context context) {
-        super.onAttach(context);
-        if (context instanceof Context) {
-            this.context = (Context) context;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        context = null;
-    }
 
     @Nullable
     @Override
@@ -40,13 +26,23 @@ public class ListFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_list, container, false);
-
+        NotesListViewModel viewModel = new ViewModelProvider(requireActivity())
+                .get(NotesListViewModel.class);
+        NotesAdapter adapter = new NotesAdapter();
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView,
+
+        viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), notes -> {
+            adapter.addNotes(notes);
+            adapter.notifyDataSetChanged();
+        });
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(
+                getContext(),
+                recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClicked(View view, int position) {
-                        context.onNotePressed(position);
+                        viewModel.onNoteClicked(position);
                     }
 
                     @Override
@@ -66,7 +62,6 @@ public class ListFragment extends Fragment {
 
         recyclerView.setLayoutManager(manager);
         recyclerView.scrollToPosition(scrollPosition);
-        MyAdapter adapter = new MyAdapter(context.getPresenter().getNotes());
         recyclerView.setAdapter(adapter);
 
         return rootView;
