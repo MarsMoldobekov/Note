@@ -1,9 +1,10 @@
 package com.example.note.domain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.Objects;
 
-public class Note implements Parcelable {
+public class Note {
+    private static int count = 0;
+    private final int id;
     private final String title;
     private final String description;
     private final String date;
@@ -12,25 +13,8 @@ public class Note implements Parcelable {
         this.title = title;
         this.description = description;
         this.date = date;
+        id = count++;
     }
-
-    protected Note(Parcel in) {
-        title = in.readString();
-        description = in.readString();
-        date = in.readString();
-    }
-
-    public static final Creator<Note> CREATOR = new Creator<Note>() {
-        @Override
-        public Note createFromParcel(Parcel in) {
-            return new Note(in);
-        }
-
-        @Override
-        public Note[] newArray(int size) {
-            return new Note[size];
-        }
-    };
 
     public String getTitle() {
         return title;
@@ -44,15 +28,23 @@ public class Note implements Parcelable {
         return date;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public int getId() {
+        return id;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(description);
-        dest.writeString(date);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Note)) return false;
+        Note note = (Note) o;
+        return id == note.id &&
+                Objects.equals(title, note.title) &&
+                Objects.equals(description, note.description) &&
+                Objects.equals(date, note.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, date);
     }
 }
