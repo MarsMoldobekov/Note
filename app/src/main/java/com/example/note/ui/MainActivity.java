@@ -31,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
         NotesListViewModel viewModel = new ViewModelProvider(this)
                 .get(NotesListViewModel.class);
 
-        if (savedInstanceState == null) {
-            viewModel.requestNotes();
-        }
-
         boolean isLandscape = getResources().getBoolean(R.bool.isLandscape);
         int id = R.id.fragment_container;
         FragmentManager manager = getSupportFragmentManager();

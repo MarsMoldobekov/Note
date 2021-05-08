@@ -15,6 +15,7 @@ import com.example.note.R;
 import com.example.note.viewmodel.NotesListViewModel;
 
 public class DetailsFragment extends Fragment {
+    NotesListViewModel viewModel;
 
     @Nullable
     @Override
@@ -28,11 +29,17 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NotesListViewModel viewModel = new ViewModelProvider(requireActivity())
+        viewModel = new ViewModelProvider(requireActivity())
                 .get(NotesListViewModel.class);
         viewModel.getSelectedNote().observe(getViewLifecycleOwner(), note -> {
             TextView textView = view.findViewById(R.id.description);
             textView.setText((note == null) ? "" : note.getDescription());
         });
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        viewModel.noteClose();
     }
 }

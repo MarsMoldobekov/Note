@@ -31,6 +31,10 @@ public class ListFragment extends Fragment {
         NotesAdapter adapter = new NotesAdapter();
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
+        if (savedInstanceState == null) {
+            viewModel.requestNotes();
+        }
+
         viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), notes -> {
             adapter.addNotes(notes);
             adapter.notifyDataSetChanged();
@@ -51,7 +55,7 @@ public class ListFragment extends Fragment {
                     }
                 })
         );
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(requireContext());
 
         int scrollPosition = 0;
 

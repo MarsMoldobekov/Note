@@ -39,4 +39,8 @@ public class NotesListViewModel extends ViewModel {
             selectedNote.setValue(((MockNotesRepository) repository).getNoteByPosition(position));
         }
     }
+
+    public void noteClose() {
+        isSelected.setValue(false);
+    }
 }
