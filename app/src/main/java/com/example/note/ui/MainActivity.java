@@ -1,6 +1,5 @@
 package com.example.note.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -79,16 +78,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_create:
-                //TODO --- realize listener for action create
-                return true;
-            case R.id.action_edit:
-                //TODO --- realize listener for action edit
-                return true;
+        if (item.getItemId() == R.id.action_create) {
+            //TODO --- realize listener for action create
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
