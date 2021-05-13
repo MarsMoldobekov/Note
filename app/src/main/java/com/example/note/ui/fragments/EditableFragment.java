@@ -1,10 +1,11 @@
 package com.example.note.ui.fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,9 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.R;
 import com.example.note.viewmodel.NotesListViewModel;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class EditableFragment extends Fragment {
     NotesListViewModel viewModel;
+    EditText editNoteDescription;
+    TextInputEditText editNoteTitle;
 
     @Nullable
     @Override
@@ -29,11 +33,16 @@ public class EditableFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(requireActivity())
-                .get(NotesListViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(NotesListViewModel.class);
+        editNoteTitle = view.findViewById(R.id.edit_note_title);
+        editNoteDescription = view.findViewById(R.id.edit_note_description);
+
+        editNoteTitle.addTextChangedListener(new TextWatcher());
+        editNoteDescription.addTextChangedListener(new TextWatcher());
+
         viewModel.getSelectedNote().observe(getViewLifecycleOwner(), note -> {
-            TextView textView = view.findViewById(R.id.description);
-            textView.setText((note == null) ? "" : note.getDescription());
+            editNoteTitle.setText((note == null) ? "" : note.getTitle());
+            editNoteDescription.setText((note == null) ? "" : note.getDescription());
         });
     }
 
@@ -41,5 +50,22 @@ public class EditableFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         viewModel.noteClose();
+    }
+
+    static class TextWatcher implements android.text.TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            //TODO --- save text
+        }
     }
 }
