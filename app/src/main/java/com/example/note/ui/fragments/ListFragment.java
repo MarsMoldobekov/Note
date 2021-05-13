@@ -1,7 +1,9 @@
 package com.example.note.ui.fragments;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,7 +53,7 @@ public class ListFragment extends Fragment {
 
                     @Override
                     public void onLongItemClicked(View view, int position) {
-
+                        registerForContextMenu(view);
                     }
                 })
         );
@@ -69,5 +71,23 @@ public class ListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu,
+                                    @NonNull View v,
+                                    @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        requireActivity().getMenuInflater().inflate(R.menu.menu_list_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_delete) {
+            //TODO --- delete note
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
     }
 }
