@@ -27,8 +27,8 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_land"
             android:name="com.example.note.ui.fragments.ListFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/fill_constraint"
+            android:layout_height="@dimen/fill_constraint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/fragment_detail"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,9 +36,9 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_detail"
-            android:name="com.example.note.ui.fragments.DetailsFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:name="com.example.note.ui.fragments.EditableFragment"
+            android:layout_width="@dimen/fill_constraint"
+            android:layout_height="@dimen/fill_constraint"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/fragment_container_land"
