@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.R;
-import com.example.note.ui.fragments.DetailsFragment;
+import com.example.note.ui.fragments.EditableFragment;
 import com.example.note.ui.fragments.ListFragment;
 import com.example.note.viewmodel.NotesListViewModel;
 import com.google.android.material.navigation.NavigationView;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             if (aBoolean && !isLandscape) {
                 manager.beginTransaction()
                         .setReorderingAllowed(true)
-                        .replace(R.id.fragment_container, new DetailsFragment())
+                        .replace(R.id.fragment_container, new EditableFragment())
                         .addToBackStack(null)
                         .commit();
             }

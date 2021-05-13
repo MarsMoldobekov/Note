@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.note.R;
 import com.example.note.viewmodel.NotesListViewModel;
 
-public class DetailsFragment extends Fragment {
+public class EditableFragment extends Fragment {
     NotesListViewModel viewModel;
 
     @Nullable
@@ -23,7 +23,7 @@ public class DetailsFragment extends Fragment {
             @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_details, container, false);
+        return inflater.inflate(R.layout.fragment_editable, container, false);
     }
 
     @Override
