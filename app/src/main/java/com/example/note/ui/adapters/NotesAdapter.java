@@ -61,7 +61,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
         public void bind(@NonNull Note note) {
             noteTitle.setText(note.getTitle());
-            noteDate.setText(note.getDate());
+            noteDate.setText(note.getDate().toString());
         }
     }
 
@@ -86,7 +86,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldList.get(oldItemPosition).getId() == newList.get(newItemPosition).getId();
+            return oldList.get(oldItemPosition).getId()
+                    .equals(newList.get(newItemPosition).getId());
         }
 
         @Override
