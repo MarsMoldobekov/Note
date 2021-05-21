@@ -1,6 +1,5 @@
 package com.example.note.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.note.R;
-import com.example.note.ui.fragments.DetailsFragment;
+import com.example.note.ui.fragments.EditableFragment;
 import com.example.note.ui.fragments.ListFragment;
 import com.example.note.viewmodel.NotesListViewModel;
 import com.google.android.material.navigation.NavigationView;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             if (aBoolean && !isLandscape) {
                 manager.beginTransaction()
                         .setReorderingAllowed(true)
-                        .replace(R.id.fragment_container, new DetailsFragment())
+                        .replace(R.id.fragment_container, new EditableFragment())
                         .addToBackStack(null)
                         .commit();
             }
@@ -79,16 +78,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_create:
-                //TODO --- realize listener for action create
-                return true;
-            case R.id.action_edit:
-                //TODO --- realize listener for action edit
-                return true;
+        if (item.getItemId() == R.id.action_create) {
+            //TODO --- realize listener for action create
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

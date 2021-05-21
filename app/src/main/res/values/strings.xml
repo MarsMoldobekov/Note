@@ -8,4 +8,6 @@
     <string name="fragment_navigation">Fragment Navigation</string>
     <string name="action_create">Create</string>
     <string name="action_edit">Edit</string>
+    <string name="description">Description</string>
+    <string name="action_delete">Delete</string>
 </resources>
