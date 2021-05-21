@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.note.domain.MockNotesRepository;
+import com.example.note.domain.Callback;
+import com.example.note.domain.FirestoreNotesRepository;
 import com.example.note.domain.Note;
 import com.example.note.domain.NotesRepository;
 
@@ -14,7 +15,7 @@ public class NotesListViewModel extends ViewModel {
     private final MutableLiveData<List<Note>> notesLiveData = new MutableLiveData<>();
     private final MutableLiveData<Note> selectedNote = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isSelected = new MutableLiveData<>(false);
-    private final NotesRepository repository = new MockNotesRepository();
+    private final NotesRepository repository = new FirestoreNotesRepository();
 
     public LiveData<List<Note>> getNotesLiveData() {
         return notesLiveData;
@@ -29,15 +30,22 @@ public class NotesListViewModel extends ViewModel {
     }
 
     public void requestNotes() {
-        notesLiveData.setValue(repository.getNotes());
+        repository.getNotes(new Callback<List<Note>>() {
+            @Override
+            public void onSuccess(List<Note> value) {
+                notesLiveData.setValue(value);
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
     }
 
     public void onNoteClicked(int position) {
         isSelected.setValue(true);
-
-        if (repository instanceof MockNotesRepository) {
-            selectedNote.setValue(((MockNotesRepository) repository).getNoteByPosition(position));
-        }
+        selectedNote.setValue(notesLiveData.getValue().get(position));
     }
 
     public void noteClose() {
